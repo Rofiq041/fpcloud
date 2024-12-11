@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Edit Mobil
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Edit Mobil</h2>
+        <form method="post" class="edit-form">
+            <div class="form-group">
+                <label for="nama_mobil">Nama Mobil:</label>
+                <input type="text" id="nama_mobil" name="nama_mobil" value="{{ car.nama_mobil }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="warna">Warna:</label>
+                <input type="text" id="warna" name="warna" value="{{ car.warna }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="merek">Merek:</label>
+                <input type="text" id="merek" name="merek" value="{{ car.merek }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="tipe">Tipe:</label>
+                <input type="text" id="tipe" name="tipe" value="{{ car.tipe }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi:</label>
+                <textarea id="deskripsi" name="deskripsi" required>{{ car.deskripsi }}</textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="harga">Harga:</label>
+                <input type="number" id="harga" name="harga" value="{{ car.harga }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="image_url">URL Gambar:</label>
+                <input type="text" id="image_url" name="image_url" value="{{ car.image_url }}">
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Simpan</button>
+            </div>
+        </form>
+    </div>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            height: 120px;
+        }
+
+        .btn-submit {
+            background-color: #007bff;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        /* Additional responsive design */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .form-group input,
+            .form-group textarea,
+            .btn-submit {
+                font-size: 14px;
+            }
+        }
+    </style>
+{% endblock %}

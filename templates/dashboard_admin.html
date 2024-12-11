@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+
+{% block title %}Daftar Mobil{% endblock %}
+
+{% block content %}
+    <style>
+        /* Kontainer utama untuk menampilkan grid mobil */
+        .car-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Grid responsif */
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Tampilan kartu untuk setiap mobil */
+        .car-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Efek hover pada kartu */
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Gambar mobil */
+        .car-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* Nama mobil dan harga */
+        .car-card .car-info {
+            padding: 10px;
+        }
+
+        .car-card .car-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .car-card .car-price {
+            font-size: 1.1em;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+
+        /* Deskripsi mobil */
+        .car-card .car-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            height: 60px; /* Batas tinggi deskripsi */
+            overflow: hidden;
+            text-overflow: ellipsis; /* Tambahkan elipsis jika deskripsi terlalu panjang */
+        }
+
+        /* Tombol Edit dan Delete untuk admin */
+        .admin-actions {
+            margin-top: 10px;
+        }
+
+        .admin-actions a {
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: rgb(255, 255, 255);
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-actions a:hover {
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: rgb(31, 42, 243);
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        /* From Uiverse.io by vinodjangid07 */ 
+        .Btn1 {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 45px;
+        height: 45px;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition-duration: .3s;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+        background-color: rgb(255, 65, 65);
+        }
+
+        /* plus sign */
+        .sign {
+        width: 100%;
+        transition-duration: .3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+
+        .sign svg {
+        width: 17px;
+        }
+
+        .sign svg path {
+        fill: white;
+        }
+        /* text */
+        .text {
+        position: absolute;
+        right: 0%;
+        width: 0%;
+        opacity: 0;
+        color: white;
+        font-size: 1.2em;
+        font-weight: 600;
+        transition-duration: .3s;
+        }
+        /* hover effect on button width */
+        .Btn1:hover {
+        width: 125px;
+        border-radius: 40px;
+        transition-duration: .3s;
+        }
+
+        .Btn1:hover .sign {
+        width: 30%;
+        transition-duration: .3s;
+        padding-left: 20px;
+        }
+        /* hover effect button's text */
+        .Btn1:hover .text {
+        opacity: 1;
+        width: 70%;
+        transition-duration: .3s;
+        padding-right: 10px;
+        }
+        /* button click effect*/
+        .Btn1:active {
+        transform: translate(2px ,2px);
+        }
+
+    </style>
+
+    <h1>Dashboard Admin</h1>
+    <button class="Btn1">
+    
+        <div class="sign"><svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg></div>
+        <a href="/logout" class="text">Logout</a>
+        </button>
+    <h2>Daftar Mobil</h2>
+    <div class="car-list">
+        {% for car in cars %}
+            <div class="car-card">
+                <img src="{{ car.image_url }}" alt="{{ car.nama_mobil }}">
+                <div class="car-info">
+                    <div class="car-name">{{ car.nama_mobil }}</div>
+                    <div class="car-warna">{{ car.warna }}</div>
+                    <div class="car-price">{{ car.harga | format_currency }}</div>
+                    <div class="car-description">{{ car.deskripsi }}</div>
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('edit_mobil', id_mobil=car.id_mobil) }}" class="btn btn-primary">Edit</a>
+                        <form action="{{ url_for('delete_mobil', id_mobil=car.id_mobil) }}" method="POST">
+                            <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah Anda yakin ingin menghapus mobil ini?')">Hapus</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2>Daftar Pengguna</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>Username</th>
+                <th>Role</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                        <!-- Jika ingin menambahkan opsi edit atau hapus, tambahkan di sini -->
+                        <a href="{{ url_for('edit_user', id=user.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <form action="{{ url_for('delete_user', id=user.id) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus akun ini?')">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

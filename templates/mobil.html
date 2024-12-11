@@ -1,0 +1,205 @@
+{% extends "base.html" %}
+
+{% block title %}Hasil Pencarian{% endblock %}
+
+{% block content %}
+    <style>
+        /* Kontainer utama yang memuat sidebar filter dan hasil pencarian */
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Sidebar untuk filter pencarian */
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .sidebar h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .sidebar label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .sidebar input,
+        .sidebar select,
+        .sidebar button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .sidebar button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        .sidebar button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Tampilan hasil pencarian menggunakan flex-wrap untuk hasil di bawahnya */
+        .car-list {
+            display: flex;
+            flex-wrap: wrap; /* Membuat elemen-elemen berpindah ke baris berikutnya */
+            gap: 20px; /* Jarak antar kartu mobil */
+            padding: 20px 0;
+            max-width: calc(100% - 270px); /* Menyesuaikan lebar agar tidak melebihi kontainer */
+        }
+
+        .car-card {
+            flex: 0 0 23%; /* Membatasi lebar setiap kartu agar ada 4 per baris (100/4 = 25%) */
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .car-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .car-card img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .car-card .car-info {
+            padding: 10px;
+        }
+
+        .car-card .car-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .car-card .car-price {
+            font-size: 1.1em;
+            color: #007BFF;
+            margin-bottom: 10px;
+        }
+
+        .car-card .car-description {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 10px;
+            height: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .admin-actions {
+            margin-top: 10px;
+        }
+
+        .admin-actions a {
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            margin: 5px;
+        }
+
+        .admin-actions a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+    <!-- Kontainer utama yang memuat sidebar filter dan hasil pencarian -->
+    <div class="container">
+        <!-- Sidebar Filter -->
+        <div class="sidebar">
+            <h3>Filter Pencarian</h3>
+            <form action="/mobil/search" method="get">
+                <!-- Pencarian berdasarkan nama mobil -->
+                <div>
+                    <label for="query">Nama Mobil:</label>
+                    <input type="text" id="query" name="query" placeholder="Cari mobil..." value="{{ query }}">
+                </div>
+
+                <!-- Rentang Harga -->
+                <div>
+                    <label for="min_price">Harga Minimum:</label>
+                    <input type="number" id="min_price" name="min_price" placeholder="Harga minimum" min="0" value="{{ min_price }}">
+                </div>
+                <div>
+                    <label for="max_price">Harga Maksimum:</label>
+                    <input type="number" id="max_price" name="max_price" placeholder="Harga maksimum" min="0" value="{{ max_price }}">
+                </div>
+
+                <!-- Urutkan berdasarkan harga -->
+                <div>
+                    <label for="sort_by">Urutkan berdasarkan harga:</label>
+                    <select id="sort_by" name="sort_by">
+                        <option value="asc" {% if sort_by == 'asc' %}selected{% endif %}>Harga Terendah ke Tertinggi</option>
+                        <option value="desc" {% if sort_by == 'desc' %}selected{% endif %}>Harga Tertinggi ke Terendah</option>
+                    </select>
+                </div>
+
+                <button type="submit">Terapkan Filter</button>
+            </form>
+        </div>
+
+        <!-- Hasil Pencarian -->
+        <div class="car-list">
+            {% if cars %}
+                <h3>Hasil Pencarian untuk "{{ query }}"{% if min_price %}
+                    <p>Harga minimum: {{ min_price | format_currency }}</p>
+                {% endif %}
+                {% if max_price %}
+                    <p>Harga maksimum:{{ max_price | format_currency }}</p>
+                {% endif %}</h3>
+                
+
+                {% for car in cars %}
+                    <div class="car-card">
+                        <img src="{{ car.image_url }}" alt="{{ car.nama_mobil }}">
+                        <div class="car-info">
+                            <div class="car-name">{{ car.nama_mobil }}</div>
+                            <div class="car-warna">{{ car.warna }}</div>
+                            <div class="car-price">{{ car.harga | format_currency }}</div>
+                            <div class="car-description">{{ car.deskripsi }}</div>
+                            {% if role == 'admin' %}
+                            <div class="d-flex justify-content-between">
+                                <!-- Tombol Edit (warna biru) -->
+                                <a href="{{ url_for('edit_mobil', id_mobil=car.id_mobil) }}" class="btn btn-primary">Edit</a>
+                        
+                                <!-- Tombol Hapus (warna biru) -->
+                                <form action="{{ url_for('delete_mobil', id_mobil=car.id_mobil) }}" method="POST">
+                                    <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah Anda yakin ingin menghapus mobil ini?')">Hapus</button>
+                                </form>
+                            </div>                         
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Tidak ada hasil yang ditemukan untuk "{{ query }}" dengan rentang harga yang diberikan.</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

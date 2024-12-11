@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Mobil</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file (if any) -->
+    <style>
+        /* Popup container to center the form */
+        .popup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+        }
+
+        /* Form styling */
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 2px; /* Increased gap between fields */
+            background-color: white;
+            padding: 2em;
+            border-radius: 12px;
+            width: 450px;
+            max-height: 500px;
+            box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+            transition: 0.4s ease-in-out;
+        }
+
+        /* Add hover effect for the form */
+        .form:hover {
+            transform: translateX(-0.5em) translateY(-0.5em);
+            border: 1px solid #171717;
+            box-shadow: 10px 10px 0px #666666;
+        }
+
+        /* Button styling */
+        .btn {
+            margin-top: 2em;
+            align-self: center;
+            padding: 0.7em;
+            padding-left: 1em;
+            padding-right: 1em;
+            border-radius: 10px;
+            border: none;
+            color: black;
+            transition: .4s ease-in-out;
+            box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+        }
+
+        /* Styling for 'Simpan' button */
+        .btn.daftar-btn {
+            background-color: #007BFF; /* Blue color */
+            color: white; /* Text color */
+            font-size: 1em;
+            padding: 0.8em 1.5em;
+            border-radius: 10px;
+            border: none;
+            margin-top: 1.5em;
+            transition: 0.4s ease-in-out;
+        }
+
+        /* Hover effect for both buttons */
+        .btn:hover {
+            box-shadow: 6px 6px 0px #969696, -3px -3px 10px #ffffff;
+            transform: translateY(-5px); /* Raise button on hover */
+        }
+
+        /* Active state for the buttons */
+        .btn:active {
+            transform: translateY(0px);
+            box-shadow: none;
+        }
+
+        /* Style for the Register header */
+        .heading {
+            color: #010102;
+            font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+            font-weight: 700;
+            font-size: 1.5em;
+            letter-spacing: 2px;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            padding-bottom: 1em;
+        }
+
+        /* Input Fields styling */
+        .input {
+            border-radius: 3px;
+            border: 1px solid whitesmoke;
+            background-color: whitesmoke;
+            outline: none;
+            padding: 0.5em;
+            font-size: 0.85em;
+            transition: 0.4s ease-in-out;
+            width: 100%;
+        }
+
+        /* Hover effect on input */
+        .input:hover {
+            box-shadow: 6px 6px 0px #969696, -3px -3px 10px #ffffff;
+        }
+
+        /* Focus effect on input */
+        .input:focus {
+            background: #ffffff;
+            box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Register Form Popup -->
+    <div class="popup-container">
+        <div class="form">
+            <h2 class="heading">Tambah Mobil</h2>
+            <form method="post">
+                <label for="nama_mobil">Nama Mobil:</label>
+                <input class="input" type="text" id="nama_mobil" name="nama_mobil" required><br>
+                
+                <label for="warna">Warna:</label>
+                <input class="input" type="text" id="warna" name="warna" required><br>
+                
+                <label for="merek">Merek:</label>
+                <input class="input" type="text" id="merek" name="merek" required><br>
+                
+                <label for="tipe">Tipe:</label>
+                <input class="input" type="text" id="tipe" name="tipe" required><br>
+                
+                <label for="deskripsi">Deskripsi:</label>
+                <textarea class="input" name="deskripsi" id="deskripsi" required></textarea><br>
+                
+                <label for="harga">Harga:</label>
+                <input class="input" type="number" id="harga" name="harga" required><br>
+                
+                <label for="image_url">URL Gambar:</label>
+                <input class="input" type="text" id="image_url" name="image_url" required><br>
+                
+                <button class="btn daftar-btn" type="submit">Simpan</button>
+                <button class="btn cancel-btn" type="button"> <a href="/dashboard/admin" class="daftar-link">Cancel</a></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript to close the popup if clicked outside -->
+    <script>
+        const popupContainer = document.querySelector('.popup-container');
+
+        function closePopup(event) {
+            if (event.target === popupContainer) {
+                popupContainer.style.display = 'none'; // Close popup when clicked outside form
+            }
+        }
+
+        popupContainer.addEventListener('click', closePopup);
+    </script>
+</body>
+</html>

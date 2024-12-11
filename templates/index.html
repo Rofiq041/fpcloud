@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<style>
+    /* From Uiverse.io by Mhyar-nsi */
+    button {
+        background-color: #c4c4c4;
+        color: #3b82f6;
+        border: none;
+        cursor: pointer;
+        border-radius: 8px;
+        width: 100px;
+        height: 45px;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #3b82f6;
+        box-shadow: 0 0 0 5px #3b83f65f;
+        color: #370eef;
+    }
+
+    /* Styling for car list section */
+    .car-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    .car-card {
+        flex: 0 0 23%;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .car-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    }
+
+    .car-card img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .car-card .car-info {
+        padding: 10px;
+    }
+
+    .car-card .car-name {
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #333;
+        margin: 5px 0;
+    }
+
+    .car-card .car-price {
+        font-size: 1.1em;
+        color: #007BFF;
+        margin-bottom: 10px;
+    }
+
+    /* Position the login button at the top-left corner */
+    .auth-links {
+        position: absolute;
+        top: 400px;
+        right: 10px;
+        z-index: 1000; /* Ensure it stays above other content */
+    }
+</style>
+
+<main>
+    <div class="auth-links">
+        <button><a href="/login" style="color: black;">Login</a></button>
+    </div>
+    
+    <h1>Selamat Datang di Jual beli Mobil</h1>
+    <p>Gunakan aplikasi ini untuk mengelola data mobil.</p>
+
+    <!-- Daftar Mobil -->
+    <div class="car-list">
+        {% if cars %}
+            {% for car in cars %}
+                <div class="car-card">
+                    <img src="{{ car.image_url }}" alt="{{ car.nama_mobil }}">
+                    <div class="car-info">
+                        <div class="car-name">{{ car.nama_mobil }}</div>
+                        <div class="car-price"> {{ car.harga | format_currency }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Tidak ada mobil yang tersedia saat ini.</p>
+        {% endif %}
+    </div>
+</main>
+
+{% endblock %}

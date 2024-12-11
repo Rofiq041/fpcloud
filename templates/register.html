@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file (if any) -->
+    <style>
+        /* Popup container to center the form */
+        .popup-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+
+        /* Smaller form size */
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 3px; /* Increased gap between fields */
+            background-color: white;
+            padding: 2em;
+            border-radius: 12px;  /* Reduced border-radius */
+            width: 450px; /* Smaller width */
+            max-height: 450px; /* Smaller height */
+            transition: 0.4s ease-in-out;
+            box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+        }
+
+        /* Add hover effect for the form */
+        .form:hover {
+            transform: translateX(-0.5em) translateY(-0.5em);
+            border: 1px solid #171717;
+            box-shadow: 10px 10px 0px #666666;
+        }
+
+        .btn {
+            margin-top: 2em;
+            align-self: center;
+            padding: 0.7em;
+            padding-left: 1em;
+            padding-right: 1em;
+            border-radius: 10px;
+            border: none;
+            color: black;
+            transition: .4s ease-in-out;
+            box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+        }
+
+        .btn.daftar-btn {
+            background-color: #007BFF; /* Blue color */
+            color: white; /* Text color */
+            padding: 0.5em 1em; /* Smaller padding */
+            font-size: 0.9em; /* Smaller font size */
+            border-radius: 10px; /* Rounded corners */
+            border: none; /* Remove border */
+            margin-top: 1em; /* Space above the button */
+            box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px; /* Same box-shadow as the login button */
+            transition: 0.4s ease-in-out;
+        }
+
+        /* Hover effect for both buttons */
+        .btn:hover {
+            box-shadow: 6px 6px 0px #969696, -3px -3px 10px #ffffff;
+            transform: translateY(-5px); /* Raise button on hover */
+        }
+
+        /* Active state for the buttons */
+        .btn:active {
+            transform: translateY(0px);
+            box-shadow: none;
+        }
+
+        /* Remove default link styling inside the button */
+        .daftar-link {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Style for the Register header */
+        .heading {
+            color: #010102;
+            font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+            font-weight: 700;
+            font-size: 1.5em; /* Slightly smaller font size */
+            letter-spacing: 2px;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            padding-bottom: 1.2em; /* Reduced padding */
+        }
+
+        /* Input Fields styling (same as login form) */
+        .input {
+            border-radius: 3px;
+            border: 1px solid whitesmoke;
+            background-color: whitesmoke;
+            outline: none;
+            padding: 0.5em; /* Reduced padding */
+            font-size: 0.85em; /* Adjusted font size */
+            transition: 0.4s ease-in-out;
+            width: 100%; /* Make inputs fill the form width */
+        }
+
+        .input:hover {
+            box-shadow: 6px 6px 0px #969696,
+                        -3px -3px 10px #ffffff;
+        }
+
+        .input:focus {
+            background: #ffffff;
+            box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Register Form Popup -->
+    <div class="popup-container">
+        <form method="post" class="form">
+            <h2 class="heading">Register</h2>
+            <input class="input" placeholder="Username" type="text" name="username" required><br>
+            <input class="input" placeholder="Email" type="email" name="email" required><br>
+            <input class="input" placeholder="Password" type="password" name="password" required><br>
+            <input class="input" placeholder="Confirm Password" type="password" name="confirm-password" required><br>
+
+            <button class="btn" type="submit">Register</button>
+
+            <!-- Custom "Login" button -->
+            <button class="btn daftar-btn" type="button"><a href="/login" class="daftar-link">Login</a></button>
+        </form>
+    </div>
+
+    <!-- JavaScript to close the popup remains the same -->
+    <script>
+        const popupContainer = document.querySelector('.popup-container');
+
+        function closePopup(event) {
+            if (event.target === popupContainer) {
+                popupContainer.style.display = 'none';
+            }
+        }
+
+        popupContainer.addEventListener('click', closePopup);
+    </script>
+</body>
+</html>

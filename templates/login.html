@@ -1,0 +1,199 @@
+<style>/* From Uiverse.io by Praashoo7 */ 
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background-color: white;
+      padding: 2.5em;
+      border-radius: 25px;
+      transition: .4s ease-in-out;
+      box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+    }
+    
+    .form:hover {
+      transform: translateX(-0.5em) translateY(-0.5em);
+      border: 1px solid #171717;
+      box-shadow: 10px 10px 0px #666666;
+    }
+    
+    .heading {
+      color: black;
+      padding-bottom: 2em;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    .input {
+      border-radius: 5px;
+      border: 1px solid whitesmoke;
+      background-color: whitesmoke;
+      outline: none;
+      padding: 0.7em;
+      transition: .4s ease-in-out;
+    }
+    
+    .input:hover {
+      box-shadow: 6px 6px 0px #969696,
+                 -3px -3px 10px #ffffff;
+    }
+    
+    .input:focus {
+      background: #ffffff;
+      box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+    }
+    
+    .form .btn {
+      margin-top: 2em;
+      align-self: center;
+      padding: 0.7em;
+      padding-left: 1em;
+      padding-right: 1em;
+      border-radius: 10px;
+      border: none;
+      color: black;
+      transition: .4s ease-in-out;
+      box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+    }
+    
+    .form .btn:hover {
+      box-shadow: 6px 6px 0px #969696,
+                 -3px -3px 10px #ffffff;
+      transform: translateX(-0.5em) translateY(-0.5em);
+    }
+    
+    .form .btn:active {
+      transition: .2s;
+      transform: translateX(0em) translateY(0em);
+      box-shadow: none;
+    }
+    
+    /* Blue "Daftar" button style */
+.btn.daftar-btn {
+    background-color: #007BFF; /* Blue color */
+    color: white; /* Text color */
+    padding: 0.5em 1em; /* Smaller padding */
+    font-size: 0.9em; /* Smaller font size */
+    border-radius: 10px; /* Rounded corners */
+    border: none; /* Remove border */
+    margin-top: 1em; /* Space above the button */
+    box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px; /* Same box-shadow as the login button */
+    transition: 0.4s ease-in-out;
+}
+
+/* Hover effect for the "Daftar" button */
+.btn.daftar-btn:hover {
+    box-shadow: 6px 6px 0px #969696, -3px -3px 10px #ffffff;
+    transform: translateX(-0.5em) translateY(-0.5em);
+}
+
+/* Active state for the "Daftar" button */
+.btn.daftar-btn:active {
+    transform: translateX(0em) translateY(0em);
+    box-shadow: none;
+}
+
+/* Remove default link styling inside the button */
+.daftar-link {
+    color: white;
+    text-decoration: none;
+}
+
+/* Popup container to center the form */
+.popup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Position the popup in the center of the screen */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full width of the viewport */
+    height: 100vh; /* Full height of the viewport */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 9999; /* Ensure the popup is on top of other elements */
+}
+
+/* The form itself with the specified dimensions (smaller size) */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    padding: 2em; /* Reduced padding for smaller size */
+    border-radius: 10px; /* Rounded corners */
+    width: 400px; /* Set the width to 400px for a more compact pop-up */
+    max-height: 500px; /* Limit the height for a compact pop-up */
+    transition: 0.4s ease-in-out;
+    box-shadow: rgba(0, 0, 0, 0.4) 1px 2px 2px;
+}
+
+/* Add hover effect for the form */
+.form:hover {
+    transform: translateX(-0.5em) translateY(-0.5em);
+    border: 1px solid #171717;
+    box-shadow: 10px 10px 0px #666666;
+}
+
+/* Adjust button sizes */
+.btn {
+    margin-top: 1.5em; /* Reduced space between the inputs and the button */
+    padding: 0.7em;
+    border-radius: 10px;
+    border: none;
+    color: black;
+    box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+    transition: 0.4s ease-in-out;
+}
+
+/* Daftar button customization */
+.btn.daftar-btn {
+    background-color: #007BFF; /* Blue color */
+    color: white; /* Text color */
+    padding: 0.5em 1em; /* Smaller padding */
+    font-size: 0.9em; /* Smaller font size */
+    margin-top: 1em; /* Space above the button */
+    box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 1px;
+}
+
+.btn.daftar-btn:hover {
+    box-shadow: 6px 6px 0px #969696, -3px -3px 10px #ffffff;
+    transform: translateX(-0.5em) translateY(-0.5em);
+}
+
+.btn.daftar-btn:active {
+    transform: translateX(0em) translateY(0em);
+    box-shadow: none;
+}
+
+/* Remove default link styling inside the button */
+.daftar-link {
+    color: white;
+    text-decoration: none;
+}
+/* Style for the Login header */
+.heading {
+    color: #010102; /* Gradient Color: Soft Blue for a modern look */
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif; /* Modern font family */
+    font-weight: 700; /* Bold font weight for emphasis */
+    font-size: 2em; /* Larger font size for prominence */
+    letter-spacing: 2px; /* Slight letter spacing for a stylish look */
+    text-align: center;
+    text-transform: uppercase; /* Makes text uppercase for a bold look */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Subtle shadow for a 3D effect */
+    padding-bottom: 1.5em; /* Reduced bottom padding to keep it compact */
+}
+
+</style>
+
+
+
+<div class="popup-container">
+    <form method="post" class="form">
+        <h2 class="heading">Login</h2>
+        <input class="input" placeholder="Username" type="text" name="username" required><br>
+        <input class="input" placeholder="Password" type="password" name="password" required><br>
+        <button class="btn" type="submit">Login</button>
+
+        <!-- Custom "Daftar" button -->
+        <button class="btn daftar-btn" type="button"><a href="/register" class="daftar-link">Daftar</a></button>
+    </form>
+</div>

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Mobil{% endblock %}
+
+{% block content %}
+<h2>Dashboard</h2>
+<p>Selamat datang, {{ username }}!</p>
+{% if role == 'admin' %}
+    <p>Anda memiliki akses admin.</p>
+{% else %}
+    <p>Anda memiliki akses user.</p>
+{% endif %}
+<a href="/">Logout</a>
+{% endblock %}

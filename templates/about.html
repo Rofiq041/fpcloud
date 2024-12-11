@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}About Me{% endblock %}
+
+{% block content %}
+<style>
+    .about-us {
+        text-align: center;
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+    .profile {
+        margin: 20px;
+    }
+    .profile img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+    }
+    .profile h2 {
+        margin: 10px 0;
+    }
+    .profile p {
+        margin: 5px 0;
+    }
+</style>
+
+<div class="about-us">
+    <h2>Profil Anggota:</h2>
+    
+    <div class="profile">
+        <img src="static/1.jpg" alt="Foto Dose Wisnu Pratama">
+        <h2>Dose Wisnu Pratama</h2>
+        <p>NIM: 22.83.0768</p>
+    </div>
+
+    <div class="profile">
+        <img src="static/2.jpg" alt="Foto Alfiansyah Naufal Qodri">
+        <h2>Alfiansyah Naufal Qodri</h2>
+        <p>NIM: 22.83.0794</p>
+    </div>
+
+    <div class="profile">
+        <img src="static/3.jpg" alt="Foto Muhammad Rofiq Faisal">
+        <h2>Muhammad Rofiq Faisal</h2>
+        <p>NIM: 22.83.0769</p>
+    </div>
+
+    <div class="profile">
+        <img src="static/4.jpg" alt="Foto Khoirul Restu Nugroho">
+        <h2>Khoirul Restu Nugroho</h2>
+        <p>NIM: 22.83.0763</p>
+    </div>
+</div>
+
+{% endblock %}
