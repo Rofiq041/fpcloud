@@ -1,3 +1,2 @@
-flask==2.2.3
-flask-socketio==5.3.2
-mysql-connector-python==8.0.33
+flask
+mysql-connector-python
