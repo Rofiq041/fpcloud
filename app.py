@@ -12,10 +12,13 @@ app.secret_key = 'your_secret_key_here'  # Ganti dengan kunci rahasia yang kuat
 
 # Konfigurasi MySQL
 db_config = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '',  # Sesuaikan password MySQL Anda
-    'database': 'db_merek'  # Nama database
+    cnx = mysql.connector.connect(user="ccweb", 
+    password="Amikom01",
+    host="webfpccawan1.mysql.database.azure.com",
+    port=3306, 
+    database="db_merek",
+    ssl_ca="{ca-cert filename}", 
+    ssl_disabled=False)
 }
 
 socketio = SocketIO(app)
